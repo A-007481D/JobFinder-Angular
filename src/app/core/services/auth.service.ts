@@ -12,7 +12,6 @@ export class AuthService {
   private router = inject(Router);
   private apiUrl = 'http://localhost:3000/users';
 
-  // Signal to track current user state
   currentUser = signal<User | null>(this.getUserFromStorage());
 
   constructor() { }
@@ -47,7 +46,6 @@ export class AuthService {
           throw new Error('Invalid email or password');
         }
         const user = users[0];
-        // Remove password before storing
         const { password, ...userWithoutPassword } = user;
         this.storeUser(userWithoutPassword, rememberMe);
         return userWithoutPassword as User;
