@@ -1,0 +1,38 @@
+<div class="bg-white overflow-hidden shadow rounded-lg mb-4 hover:shadow-md transition-shadow duration-300">
+    <div class="px-4 py-5 sm:p-6">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    {{ job.title }}
+                </h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                    {{ job.company }} • {{ job.location }}
+                </p>
+            </div>
+            <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                {{ job.type || 'Full-time' }}
+            </span>
+        </div>
+        <div class="mt-2 text-sm text-gray-500">
+            <p class="line-clamp-3">{{ job.description }}</p>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-xs text-gray-400">Posted: {{ job.datePosted }}</span>
+            <a [routerLink]="['/jobs', job.id]"
+                class="text-indigo-600 hover:text-indigo-900 text-sm font-medium cursor-pointer">
+                View Details &rarr;
+            </a>
+        </div>
+        <div class="mt-4 flex justify-end" *ngIf="authService.isAuthenticated()">
+            <button *ngIf="(isFavorite$ | async) === false" (click)="addToFavorites()"
+                class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">
+                Add to Favorites
+            </button>
+            <button *ngIf="(isFavorite$ | async) === true" (click)="removeFromFavorites()"
+                class="text-red-600 hover:text-red-900 text-sm font-medium">
+                Remove from Favorites
+            </button>
+        </div>
+    </div>
+</div>

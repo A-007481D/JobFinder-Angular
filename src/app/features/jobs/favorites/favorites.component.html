@@ -1,0 +1,21 @@
+<div class="min-h-screen bg-gray-100">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-gray-900">
+                My Favorites
+            </h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <ng-container *ngIf="favorites$ | async as favorites">
+                <app-list [jobs]="favorites" [isLoading]="(loading$ | async) || false"></app-list>
+
+                <div *ngIf="favorites.length === 0" class="text-center py-12 text-gray-500">
+                    You haven't added any jobs to your favorites yet.
+                </div>
+            </ng-container>
+        </div>
+    </main>
+</div>
