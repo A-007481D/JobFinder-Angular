@@ -24,7 +24,7 @@
                 View Details &rarr;
             </a>
         </div>
-        <div class="mt-4 flex justify-end" *ngIf="authService.isAuthenticated()">
+        <div class="mt-4 flex justify-end gap-2" *ngIf="authService.isAuthenticated()">
             <button *ngIf="(isFavorite$ | async) === false" (click)="addToFavorites()"
                 class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">
                 Add to Favorites
@@ -32,6 +32,10 @@
             <button *ngIf="(isFavorite$ | async) === true" (click)="removeFromFavorites()"
                 class="text-red-600 hover:text-red-900 text-sm font-medium">
                 Remove from Favorites
+            </button>
+            <button (click)="trackApplication()" [disabled]="isApplied" [class.text-gray-400]="isApplied"
+                [class.text-indigo-600]="!isApplied" class="hover:text-indigo-900 text-sm font-medium border-l pl-2">
+                {{ isApplied ? 'Applied' : 'Track Application' }}
             </button>
         </div>
     </div>

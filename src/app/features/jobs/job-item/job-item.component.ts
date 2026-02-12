@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { JobOffer } from '../../../core/models/job.model';
 import { AuthService } from '../../../core/services/auth.service';
+import { ApplicationService } from '../../../core/services/application.service';
 import * as FavoritesActions from '../../../core/store/favorites/favorites.actions';
 import { isFavorite } from '../../../core/store/favorites/favorites.selectors';
 
@@ -20,8 +21,10 @@ export class JobItemComponent implements OnInit {
 
   private store = inject(Store);
   authService = inject(AuthService);
+  private applicationService = inject(ApplicationService);
 
   isFavorite$!: Observable<boolean>;
+  isApplied = false; // Simple local state for demo
 
   ngOnInit() {
     this.isFavorite$ = this.store.select(isFavorite(this.job.id));
@@ -30,7 +33,7 @@ export class JobItemComponent implements OnInit {
   toggleFavorite() {
     this.isFavorite$.subscribe(isFav => {
     });
-   
+
   }
 
   addToFavorites() {
@@ -39,5 +42,21 @@ export class JobItemComponent implements OnInit {
 
   removeFromFavorites() {
     this.store.dispatch(FavoritesActions.removeFavorite({ jobId: this.job.id }));
+  }
+
+  trackApplication() {
+    const user = this.authService.currentUser();
+    if (!user) return;
+
+    this.applicationService.addApplication({
+      jobId: this.job.id,
+      job: this.job,
+      userId: user.id,
+      status: 'Pending',
+      dateApplied: new Date().toISOString()
+    }).subscribe(() => {
+      this.isApplied = true;
+      alert('Application tracked successfully!');
+    });
   }
 }

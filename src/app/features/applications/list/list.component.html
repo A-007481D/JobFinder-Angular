@@ -1,0 +1,58 @@
+<div class="min-h-screen bg-gray-100">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-gray-900">
+                My Applications
+            </h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow overflow-hidden sm:rounded-md" *ngIf="applications$ | async as applications">
+                <ul role="list" class="divide-y divide-gray-200" *ngIf="applications.length > 0; else noApps">
+                    <li *ngFor="let app of applications">
+                        <div class="px-4 py-4 sm:px-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-indigo-600 truncate">
+                                    {{ app.job.title }}
+                                </p>
+                                <div class="ml-2 flex-shrink-0 flex">
+                                    <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full" [ngClass]="{
+                                           'bg-green-100 text-green-800': app.status === 'Accepted',
+                                           'bg-red-100 text-red-800': app.status === 'Rejected',
+                                           'bg-yellow-100 text-yellow-800': app.status === 'Interview',
+                                           'bg-gray-100 text-gray-800': app.status === 'Pending'
+                                       }">
+                                        {{ app.status }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-2 sm:flex sm:justify-between">
+                                <div class="sm:flex">
+                                    <p class="flex items-center text-sm text-gray-500">
+                                        {{ app.job.company }}
+                                    </p>
+                                    <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                        {{ app.job.location }}
+                                    </p>
+                                </div>
+                                <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                                    <p>
+                                        Applied on <time [datetime]="app.dateApplied">{{ app.dateApplied | date
+                                            }}</time>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ng-template #noApps>
+                    <div class="text-center py-12 text-gray-500">
+                        You haven't tracked any applications yet.
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </main>
+</div>
