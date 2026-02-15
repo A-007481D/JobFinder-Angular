@@ -1,0 +1,14 @@
+<div class="page-container">
+    <div class="text-center mb-10">
+        <h1 class="text-4xl sm:text-5xl font-bold gradient-text mb-3">Find Your Next Opportunity</h1>
+        <p class="text-gray-400 text-lg">Search thousands of job offers from top companies worldwide</p>
+    </div>
+
+    <app-search (search)="onSearch($event)"></app-search>
+
+    <div class="mt-8">
+        <app-list [jobs]="jobs" [isLoading]="isLoading" [totalResults]="totalResults" [currentPage]="currentPage"
+            [hasSearched]="hasSearched" (pageChange)="onPageChange($event)">
+        </app-list>
+    </div>
+</div>
