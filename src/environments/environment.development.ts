@@ -4,5 +4,5 @@ export const environment = {
         appId: 'YOUR_DEV_APP_ID',
         appKey: 'YOUR_DEV_APP_KEY'
     },
-    apiUrl: 'http://localhost:3000'
+    apiUrl: 'http://localhost:3001'
 };
