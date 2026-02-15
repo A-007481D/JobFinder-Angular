@@ -1,58 +1,77 @@
-<div class="min-h-screen bg-gray-100">
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-gray-900">
-                My Applications
-            </h1>
-        </div>
-    </header>
+<div class="page-container">
+    <h1 class="section-title mb-6">My Applications</h1>
 
-    <main>
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <div class="bg-white shadow overflow-hidden sm:rounded-md" *ngIf="applications$ | async as applications">
-                <ul role="list" class="divide-y divide-gray-200" *ngIf="applications.length > 0; else noApps">
-                    <li *ngFor="let app of applications">
-                        <div class="px-4 py-4 sm:px-6">
-                            <div class="flex items-center justify-between">
-                                <p class="text-sm font-medium text-indigo-600 truncate">
-                                    {{ app.job.title }}
-                                </p>
-                                <div class="ml-2 flex-shrink-0 flex">
-                                    <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full" [ngClass]="{
-                                           'bg-green-100 text-green-800': app.status === 'Accepted',
-                                           'bg-red-100 text-red-800': app.status === 'Rejected',
-                                           'bg-yellow-100 text-yellow-800': app.status === 'Interview',
-                                           'bg-gray-100 text-gray-800': app.status === 'Pending'
-                                       }">
-                                        {{ app.status }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="mt-2 sm:flex sm:justify-between">
-                                <div class="sm:flex">
-                                    <p class="flex items-center text-sm text-gray-500">
-                                        {{ app.job.company }}
-                                    </p>
-                                    <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                        {{ app.job.location }}
-                                    </p>
-                                </div>
-                                <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                    <p>
-                                        Applied on <time [datetime]="app.dateApplied">{{ app.dateApplied | date
-                                            }}</time>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <ng-template #noApps>
-                    <div class="text-center py-12 text-gray-500">
-                        You haven't tracked any applications yet.
-                    </div>
-                </ng-template>
+    <div *ngIf="isLoading" class="space-y-4">
+        <div *ngFor="let i of [1,2,3]" class="glass-card p-6">
+            <div class="flex justify-between items-center">
+                <div class="space-y-2 flex-1">
+                    <div class="skeleton h-5 w-1/2"></div>
+                    <div class="skeleton h-4 w-1/3"></div>
+                </div>
+                <div class="skeleton h-7 w-24 rounded-full"></div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <div *ngIf="!isLoading && applications.length === 0" class="glass-card p-12 text-center">
+        <svg class="w-16 h-16 text-gray-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        <h3 class="text-xl font-semibold text-gray-300 mb-2">No applications yet</h3>
+        <p class="text-gray-500">Start tracking your job applications from the search page</p>
+    </div>
+
+    <div *ngIf="!isLoading && applications.length > 0" class="space-y-4">
+        <div *ngFor="let app of applications" class="glass-card-hover p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-base font-semibold text-white">{{ app.title }}</h3>
+                    <div class="flex flex-wrap items-center gap-2 mt-1">
+                        <span class="text-sm text-gray-400">{{ app.company }}</span>
+                        <span class="text-gray-600">•</span>
+                        <span class="text-sm text-gray-400">{{ app.location }}</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Added {{ app.dateAdded | relativeTime }}</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <select [ngModel]="app.status" (ngModelChange)="updateStatus(app, $event)"
+                        class="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-violet-500 cursor-pointer">
+                        <option value="en_attente" class="bg-slate-900">En attente</option>
+                        <option value="accepte" class="bg-slate-900">Accepté</option>
+                        <option value="refuse" class="bg-slate-900">Refusé</option>
+                    </select>
+
+                    <span [ngClass]="{
+            'badge-warning': app.status === 'en_attente',
+            'badge-success': app.status === 'accepte',
+            'badge-danger': app.status === 'refuse'
+          }">{{ app.status | statusLabel }}</span>
+                </div>
+            </div>
+
+            <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
+                <div class="flex-1">
+                    <div *ngIf="editingNotesId !== app.id" class="text-sm text-gray-400">
+                        <span *ngIf="app.notes">{{ app.notes }}</span>
+                        <span *ngIf="!app.notes" class="text-gray-600 italic">No notes</span>
+                    </div>
+                    <textarea *ngIf="editingNotesId === app.id" [(ngModel)]="app.notes" rows="2"
+                        class="input-field text-sm" placeholder="Add personal notes..."></textarea>
+                </div>
+
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <button *ngIf="editingNotesId !== app.id" (click)="toggleNotesEdit(app.id!)"
+                        class="btn-glass text-xs py-1.5 px-3">Edit Notes</button>
+                    <button *ngIf="editingNotesId === app.id" (click)="saveNotes(app)"
+                        class="btn-primary text-xs py-1.5 px-3">Save</button>
+                    <button *ngIf="editingNotesId === app.id" (click)="editingNotesId = null"
+                        class="btn-glass text-xs py-1.5 px-3">Cancel</button>
+                    <a [href]="app.url" target="_blank" class="btn-glass text-xs py-1.5 px-3">View Offer</a>
+                    <button (click)="deleteApplication(app)" class="btn-danger text-xs py-1.5 px-3">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
