@@ -13,9 +13,14 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent {
   authService = inject(AuthService);
   private router = inject(Router);
+  mobileMenuOpen = false;
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  toggleMobileMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 }

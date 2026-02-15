@@ -1,1 +1,82 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+    body {
+        @apply bg-slate-950 text-white font-sans antialiased;
+        font-family: 'Inter', sans-serif;
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-slate-900;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-violet-600 rounded-full;
+    }
+}
+
+@layer components {
+    .glass-card {
+        @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+    }
+
+    .glass-card-hover {
+        @apply glass-card transition-all duration-300 hover:bg-white/10 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10;
+    }
+
+    .gradient-text {
+        @apply bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent;
+    }
+
+    .btn-primary {
+        @apply bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/30 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none;
+    }
+
+    .btn-glass {
+        @apply bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-white/10 hover:border-white/20;
+    }
+
+    .btn-danger {
+        @apply bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-red-500/20 hover:border-red-500/40;
+    }
+
+    .input-field {
+        @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all duration-300;
+    }
+
+    .badge-success {
+        @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-medium;
+    }
+
+    .badge-warning {
+        @apply bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full text-xs font-medium;
+    }
+
+    .badge-danger {
+        @apply bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full text-xs font-medium;
+    }
+
+    .badge-info {
+        @apply bg-violet-500/10 text-violet-400 border border-violet-500/20 px-3 py-1 rounded-full text-xs font-medium;
+    }
+
+    .page-container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+    }
+
+    .section-title {
+        @apply text-2xl sm:text-3xl font-bold gradient-text;
+    }
+
+    .skeleton {
+        @apply bg-white/5 rounded-xl animate-pulse;
+    }
+}
