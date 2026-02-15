@@ -5,15 +5,20 @@ export const selectFavoritesState = createFeatureSelector<FavoritesState>('favor
 
 export const selectAllFavorites = createSelector(
     selectFavoritesState,
-    (state: FavoritesState) => state.favorites
+    state => state.favorites
 );
 
 export const selectFavoritesLoading = createSelector(
     selectFavoritesState,
-    (state: FavoritesState) => state.loading
+    state => state.loading
 );
 
-export const isFavorite = (jobId: string) => createSelector(
+export const selectIsFavorite = (offerId: string) => createSelector(
     selectAllFavorites,
-    (favorites) => favorites.some(job => job.id === jobId)
+    favorites => favorites.some(f => f.offerId === offerId)
+);
+
+export const selectFavoriteByOfferId = (offerId: string) => createSelector(
+    selectAllFavorites,
+    favorites => favorites.find(f => f.offerId === offerId)
 );

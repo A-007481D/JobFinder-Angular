@@ -1,26 +1,37 @@
 import { createAction, props } from '@ngrx/store';
-import { JobOffer } from '../../models/job.model';
+import { Favorite } from '../../models/favorite.model';
 
 export const loadFavorites = createAction(
-    '[Favorites] Load Favorites'
+    '[Favorites] Load Favorites',
+    props<{ userId: number }>()
 );
 
 export const loadFavoritesSuccess = createAction(
     '[Favorites] Load Favorites Success',
-    props<{ favorites: JobOffer[] }>()
+    props<{ favorites: Favorite[] }>()
 );
 
 export const loadFavoritesFailure = createAction(
     '[Favorites] Load Favorites Failure',
-    props<{ error: any }>()
+    props<{ error: string }>()
 );
 
 export const addFavorite = createAction(
     '[Favorites] Add Favorite',
-    props<{ job: JobOffer }>()
+    props<{ favorite: Omit<Favorite, 'id'> }>()
+);
+
+export const addFavoriteSuccess = createAction(
+    '[Favorites] Add Favorite Success',
+    props<{ favorite: Favorite }>()
 );
 
 export const removeFavorite = createAction(
     '[Favorites] Remove Favorite',
-    props<{ jobId: string }>()
+    props<{ id: number }>()
+);
+
+export const removeFavoriteSuccess = createAction(
+    '[Favorites] Remove Favorite Success',
+    props<{ id: number }>()
 );

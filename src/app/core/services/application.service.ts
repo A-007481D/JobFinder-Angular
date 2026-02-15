@@ -1,30 +1,33 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Application } from '../models/application.model';
-import { JobOffer } from '../models/job.model';
+import { Observable } from 'rxjs';
+import { Application, ApplicationStatus } from '../models/application.model';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApplicationService {
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:3000/applications'; 
+    private apiUrl = `${environment.apiUrl}/applications`;
 
-    getApplications(userId: string): Observable<Application[]> {
+    getApplications(userId: number): Observable<Application[]> {
         return this.http.get<Application[]>(`${this.apiUrl}?userId=${userId}`);
     }
 
     addApplication(application: Omit<Application, 'id'>): Observable<Application> {
-        
         return this.http.post<Application>(this.apiUrl, application);
     }
 
-    updateStatus(id: string, status: string): Observable<Application> {
+    updateStatus(id: number, status: ApplicationStatus): Observable<Application> {
         return this.http.patch<Application>(`${this.apiUrl}/${id}`, { status });
     }
 
-    updateNotes(id: string, notes: string): Observable<Application> {
+    updateNotes(id: number, notes: string): Observable<Application> {
         return this.http.patch<Application>(`${this.apiUrl}/${id}`, { notes });
+    }
+
+    deleteApplication(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 }
