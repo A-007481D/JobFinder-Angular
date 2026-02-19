@@ -1,14 +1,50 @@
-<div class="page-container max-w-2xl">
-    <h1 class="section-title mb-6">Profile Settings</h1>
+<div class="page-container max-w-3xl fade-in">
+    <!-- Profile Header -->
+    <div class="glass-card p-8 mb-6">
+        <div class="flex flex-col sm:flex-row items-center gap-6">
+            <div class="avatar-circle w-20 h-20 text-2xl">{{ userInitials }}</div>
+            <div class="text-center sm:text-left flex-1">
+                <h1 class="text-2xl font-bold text-gray-900">
+                    {{ authService.currentUser()?.firstName }} {{ authService.currentUser()?.lastName }}
+                </h1>
+                <p class="text-gray-500 mt-1">{{ authService.currentUser()?.email }}</p>
+            </div>
+        </div>
 
-    <div *ngIf="successMessage" class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mb-6 text-center">
-        <p class="text-emerald-600 text-sm">{{ successMessage }}</p>
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-4 mt-8">
+            <div class="stat-card">
+                <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mx-auto mb-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                </div>
+                <p class="text-2xl font-bold text-gray-900">{{ favoritesCount }}</p>
+                <p class="text-sm text-gray-500">Saved Jobs</p>
+            </div>
+            <div class="stat-card">
+                <div class="w-10 h-10 bg-teal-50 rounded-xl flex items-center justify-center mx-auto mb-2">
+                    <svg class="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <p class="text-2xl font-bold text-gray-900">{{ applicationsCount }}</p>
+                <p class="text-sm text-gray-500">Applications</p>
+            </div>
+        </div>
     </div>
 
-    <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 rounded-xl p-3 mb-6 text-center">
-        <p class="text-red-600 text-sm">{{ errorMessage }}</p>
+    <!-- Messages -->
+    <div *ngIf="successMessage" class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mb-6 text-center fade-in">
+        <p class="text-emerald-600 text-sm font-medium">{{ successMessage }}</p>
+    </div>
+    <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 rounded-xl p-3 mb-6 text-center fade-in">
+        <p class="text-red-600 text-sm font-medium">{{ errorMessage }}</p>
     </div>
 
+    <!-- Forms -->
     <app-profile-info-form [form]="profileForm" [isLoading]="isLoading" (save)="onUpdateProfile()" class="block mb-6">
     </app-profile-info-form>
 
@@ -16,6 +52,7 @@
         class="block mb-6">
     </app-change-password-form>
 
+    <!-- Danger Zone -->
     <div class="glass-card p-8 border-red-200">
         <h2 class="text-lg font-semibold text-red-600 mb-2">Danger Zone</h2>
         <p class="text-gray-500 text-sm mb-4">Once you delete your account, there is no going back.</p>
@@ -24,7 +61,7 @@
             <button (click)="showDeleteConfirm = true" class="btn-danger">Delete Account</button>
         </div>
 
-        <div *ngIf="showDeleteConfirm" class="bg-red-50 border border-red-200 rounded-xl p-4">
+        <div *ngIf="showDeleteConfirm" class="bg-red-50 border border-red-200 rounded-xl p-4 fade-in">
             <p class="text-red-600 text-sm mb-3">Are you sure? This action cannot be undone.</p>
             <div class="flex gap-3">
                 <button (click)="onDeleteAccount()"

@@ -1,7 +1,15 @@
-<div class="page-container">
-    <h1 class="section-title mb-6">My Favorites</h1>
+<div class="page-container fade-in">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="section-title">My Favorites</h1>
+            <p class="text-gray-500 text-sm mt-1">Jobs you've saved for later</p>
+        </div>
+        <div *ngIf="(favorites$ | async)?.length" class="badge-info text-sm">
+            {{ (favorites$ | async)?.length }} saved
+        </div>
+    </div>
 
-    <div *ngIf="loading$ | async" class="space-y-4">
+    <div *ngIf="loading$ | async" class="space-y-5">
         <div *ngFor="let i of [1,2,3]" class="glass-card p-6">
             <div class="flex justify-between items-center">
                 <div class="space-y-2 flex-1">
@@ -14,16 +22,18 @@
     </div>
 
     <ng-container *ngIf="!(loading$ | async)">
-        <div *ngIf="(favorites$ | async)?.length === 0" class="glass-card p-12 text-center">
-            <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
+        <div *ngIf="(favorites$ | async)?.length === 0" class="glass-card p-16 text-center">
+            <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                <svg class="w-10 h-10 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+            </div>
             <h3 class="text-xl font-semibold text-gray-700 mb-2">No favorites yet</h3>
             <p class="text-gray-500">Save jobs you're interested in from the search results</p>
         </div>
 
-        <div class="space-y-4">
+        <div class="space-y-5">
             <app-favorite-item *ngFor="let fav of (favorites$ | async)" [favorite]="fav"
                 (remove)="removeFavorite($event)">
             </app-favorite-item>

@@ -2,8 +2,12 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { ApplicationService } from '../../../core/services/application.service';
 import { ProfileInfoFormComponent } from './profile-info-form/profile-info-form.component';
 import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
+import { Store } from '@ngrx/store';
+import { selectAllFavorites } from '../../../core/store/favorites/favorites.selectors';
+import * as FavoritesActions from '../../../core/store/favorites/favorites.actions';
 
 @Component({
     selector: 'app-profile',
@@ -14,6 +18,8 @@ import { ChangePasswordFormComponent } from './change-password-form/change-passw
 })
 export class ProfileComponent {
     private fb = inject(FormBuilder);
+    private applicationService = inject(ApplicationService);
+    private store = inject(Store);
     authService = inject(AuthService);
 
     profileForm = this.fb.group({
@@ -31,6 +37,27 @@ export class ProfileComponent {
     errorMessage = '';
     isLoading = false;
     showDeleteConfirm = false;
+    favoritesCount = 0;
+    applicationsCount = 0;
+
+    ngOnInit() {
+        const user = this.authService.currentUser();
+        if (user) {
+            this.store.dispatch(FavoritesActions.loadFavorites({ userId: user.id }));
+            this.store.select(selectAllFavorites).subscribe(favs => {
+                this.favoritesCount = favs.length;
+            });
+            this.applicationService.getApplications(user.id).subscribe(apps => {
+                this.applicationsCount = apps.length;
+            });
+        }
+    }
+
+    get userInitials(): string {
+        const user = this.authService.currentUser();
+        if (!user) return '?';
+        return (user.firstName.charAt(0) + user.lastName.charAt(0)).toUpperCase();
+    }
 
     onUpdateProfile() {
         if (this.profileForm.valid) {

@@ -25,6 +25,7 @@ export class JobsComponent {
   totalResults = 0;
   currentPage = 1;
   hasSearched = false;
+  viewMode: 'list' | 'grid' = 'list';
 
   ngOnInit(): void {
     const user = this.authService.currentUser();
@@ -41,6 +42,10 @@ export class JobsComponent {
   onPageChange(page: number) {
     this.currentPage = page;
     this.searchJobs(this.lastKeywords, this.lastLocation);
+  }
+
+  toggleView() {
+    this.viewMode = this.viewMode === 'list' ? 'grid' : 'list';
   }
 
   private lastKeywords = '';

@@ -6,8 +6,79 @@
       "email": "john@test.com",
       "password": "123456",
       "id": 1
+    },
+    {
+      "firstName": "Medge",
+      "lastName": "Mcclure",
+      "email": "zufaja@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 2
+    },
+    {
+      "firstName": "Raymond",
+      "lastName": "Britt",
+      "email": "dosilolak@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 3
     }
   ],
-  "favoritesOffers": [],
-  "applications": []
+  "favoritesOffers": [
+    {
+      "userId": 3,
+      "offerId": "solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "title": "Solution Architect Automation & AI (n8n Focus)",
+      "company": "relyon AG",
+      "location": "Tübingen",
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "offerId": "kommunikationsdesigner-frankfurt-am-main-384876",
+      "title": "Kommunikationsdesigner (m/w/d)",
+      "company": "AI Hub Frankfurt",
+      "location": "Frankfurt am Main",
+      "id": 2
+    }
+  ],
+  "applications": [
+    {
+      "userId": 3,
+      "offerId": "solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "apiSource": "arbeitnow",
+      "title": "Solution Architect Automation & AI (n8n Focus)",
+      "company": "relyon AG",
+      "location": "Tübingen",
+      "url": "https://www.arbeitnow.com/jobs/companies/relyon-ag/solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "status": "accepte",
+      "notes": "nh",
+      "dateAdded": "2026-02-19T23:39:42.343Z",
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "offerId": "kommunikationsdesigner-frankfurt-am-main-384876",
+      "apiSource": "arbeitnow",
+      "title": "Kommunikationsdesigner (m/w/d)",
+      "company": "AI Hub Frankfurt",
+      "location": "Frankfurt am Main",
+      "url": "https://www.arbeitnow.com/jobs/companies/ai-hub-frankfurt/kommunikationsdesigner-frankfurt-am-main-384876",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-19T23:39:48.606Z",
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "offerId": "solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "apiSource": "arbeitnow",
+      "title": "Solution Architect Automation & AI (n8n Focus)",
+      "company": "relyon AG",
+      "location": "Tübingen",
+      "url": "https://www.arbeitnow.com/jobs/companies/relyon-ag/solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-19T23:50:41.349Z",
+      "id": 3
+    }
+  ]
 }

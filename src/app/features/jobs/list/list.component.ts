@@ -16,7 +16,9 @@ export class ListComponent {
   @Input() totalResults = 0;
   @Input() currentPage = 1;
   @Input() hasSearched = false;
+  @Input() viewMode: 'list' | 'grid' = 'list';
   @Output() pageChange = new EventEmitter<number>();
+  @Output() viewModeChange = new EventEmitter<'list' | 'grid'>();
 
   get totalPages(): number {
     return Math.ceil(this.totalResults / 10);

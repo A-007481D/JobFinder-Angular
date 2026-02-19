@@ -1,7 +1,15 @@
-<div class="page-container">
-    <h1 class="section-title mb-6">My Applications</h1>
+<div class="page-container fade-in">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="section-title">My Applications</h1>
+            <p class="text-gray-500 text-sm mt-1">Track and manage your job applications</p>
+        </div>
+        <div *ngIf="!isLoading && applications.length" class="badge-info text-sm">
+            {{ applications.length }} tracked
+        </div>
+    </div>
 
-    <div *ngIf="isLoading" class="space-y-4">
+    <div *ngIf="isLoading" class="space-y-5">
         <div *ngFor="let i of [1,2,3]" class="glass-card p-6">
             <div class="flex justify-between items-center">
                 <div class="space-y-2 flex-1">
@@ -13,16 +21,18 @@
         </div>
     </div>
 
-    <div *ngIf="!isLoading && applications.length === 0" class="glass-card p-12 text-center">
-        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
+    <div *ngIf="!isLoading && applications.length === 0" class="glass-card p-16 text-center">
+        <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg class="w-10 h-10 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+        </div>
         <h3 class="text-xl font-semibold text-gray-700 mb-2">No applications yet</h3>
         <p class="text-gray-500">Start tracking your job applications from the search page</p>
     </div>
 
-    <div *ngIf="!isLoading && applications.length > 0" class="space-y-4">
+    <div *ngIf="!isLoading && applications.length > 0" class="space-y-5">
         <app-application-item *ngFor="let app of applications" [application]="app"
             (statusChange)="onStatusChange($event)" (notesSave)="onNotesSave($event)" (delete)="onDelete($event)">
         </app-application-item>

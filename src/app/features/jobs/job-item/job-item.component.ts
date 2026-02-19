@@ -19,6 +19,7 @@ import { take } from 'rxjs/operators';
 })
 export class JobItemComponent implements OnInit {
   @Input({ required: true }) job!: JobOffer;
+  @Input() compact = false;
 
   private store = inject(Store);
   authService = inject(AuthService);

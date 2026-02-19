@@ -1,29 +1,31 @@
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center gap-8">
-        <a routerLink="/" class="flex items-center gap-2 group">
-          <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
+        <a routerLink="/" class="flex items-center gap-2.5 group">
+          <div
+            class="w-9 h-9 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-sm shadow-teal-500/20">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M21 13.255A23.193 23.193 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <span class="text-lg font-bold text-teal-600">JobFinder</span>
+          <span
+            class="text-lg font-bold bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent">JobFinder</span>
         </a>
 
         <div class="hidden md:flex items-center gap-1">
           <a routerLink="/jobs" routerLinkActive="bg-teal-50 text-teal-600"
-            class="text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">
+            class="text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200">
             Jobs
           </a>
           <ng-container *ngIf="authService.isAuthenticated()">
             <a routerLink="/favorites" routerLinkActive="bg-teal-50 text-teal-600"
-              class="text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">
+              class="text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200">
               Favorites
             </a>
             <a routerLink="/applications" routerLinkActive="bg-teal-50 text-teal-600"
-              class="text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">
+              class="text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200">
               Applications
             </a>
           </ng-container>
@@ -32,8 +34,14 @@
 
       <div class="hidden md:flex items-center gap-3">
         <ng-container *ngIf="authService.isAuthenticated(); else authButtons">
-          <a routerLink="/profile" class="text-gray-700 hover:text-teal-600 transition-colors text-sm font-medium">
-            {{ authService.currentUser()?.firstName }} {{ authService.currentUser()?.lastName }}
+          <a routerLink="/profile"
+            class="flex items-center gap-2.5 hover:bg-gray-50 px-3 py-1.5 rounded-xl transition-all duration-200">
+            <div class="w-8 h-8 avatar-circle text-xs">
+              {{ authService.currentUser()?.firstName?.charAt(0) }}{{ authService.currentUser()?.lastName?.charAt(0) }}
+            </div>
+            <span class="text-sm font-medium text-gray-700">
+              {{ authService.currentUser()?.firstName }}
+            </span>
           </a>
           <button (click)="logout()" class="btn-glass text-sm py-1.5 px-4">Logout</button>
         </ng-container>
@@ -44,7 +52,8 @@
         </ng-template>
       </div>
 
-      <button (click)="toggleMobileMenu()" class="md:hidden text-gray-600 hover:text-teal-600">
+      <button (click)="toggleMobileMenu()"
+        class="md:hidden text-gray-600 hover:text-teal-600 p-2 rounded-xl hover:bg-gray-100 transition-all">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path *ngIf="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M4 6h16M4 12h16M4 18h16" />
@@ -55,25 +64,27 @@
     </div>
   </div>
 
-  <div *ngIf="mobileMenuOpen" class="md:hidden border-t border-gray-200 bg-white">
+  <div *ngIf="mobileMenuOpen" class="md:hidden border-t border-gray-200/50 bg-white/95 backdrop-blur-xl">
     <div class="px-4 py-3 space-y-1">
       <a routerLink="/jobs" (click)="mobileMenuOpen = false"
-        class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2 rounded-lg text-sm">Jobs</a>
+        class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">Jobs</a>
       <ng-container *ngIf="authService.isAuthenticated()">
         <a routerLink="/favorites" (click)="mobileMenuOpen = false"
-          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2 rounded-lg text-sm">Favorites</a>
+          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">Favorites</a>
         <a routerLink="/applications" (click)="mobileMenuOpen = false"
-          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2 rounded-lg text-sm">Applications</a>
+          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">Applications</a>
         <a routerLink="/profile" (click)="mobileMenuOpen = false"
-          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2 rounded-lg text-sm">Profile</a>
-        <button (click)="logout(); mobileMenuOpen = false"
-          class="w-full text-left text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2 rounded-lg text-sm">Logout</button>
+          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">Profile</a>
+        <div class="border-t border-gray-200 pt-2 mt-2">
+          <button (click)="logout(); mobileMenuOpen = false"
+            class="w-full text-left text-red-500 hover:bg-red-50 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">Logout</button>
+        </div>
       </ng-container>
       <ng-container *ngIf="!authService.isAuthenticated()">
         <a routerLink="/login" (click)="mobileMenuOpen = false"
-          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2 rounded-lg text-sm">Login</a>
+          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">Login</a>
         <a routerLink="/register" (click)="mobileMenuOpen = false"
-          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2 rounded-lg text-sm">Register</a>
+          class="block text-gray-600 hover:text-teal-600 hover:bg-teal-50 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">Register</a>
       </ng-container>
     </div>
   </div>

@@ -29,27 +29,35 @@
     }
 
     .glass-card-hover {
-        @apply glass-card transition-all duration-300 hover:shadow-md hover:border-teal-300;
+        @apply glass-card transition-all duration-300 hover:shadow-md hover:border-teal-300 hover:-translate-y-0.5;
     }
 
     .gradient-text {
-        @apply text-gray-900 font-bold;
+        @apply bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent font-bold;
     }
 
     .btn-primary {
-        @apply bg-teal-600 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 hover:bg-teal-700 hover:shadow-lg hover:shadow-teal-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none;
+        @apply bg-teal-600 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 hover:bg-teal-700 hover:shadow-lg hover:shadow-teal-500/20 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:active:scale-100;
     }
 
     .btn-glass {
-        @apply bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-gray-200 hover:border-gray-400;
+        @apply bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-gray-200 hover:border-gray-400 active:scale-[0.97];
     }
 
     .btn-danger {
-        @apply bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-red-100 hover:border-red-300;
+        @apply bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:bg-red-100 hover:border-red-300 active:scale-[0.97];
+    }
+
+    .btn-icon {
+        @apply p-2 rounded-xl transition-all duration-300 hover:bg-gray-100 active:scale-[0.95] text-gray-500 hover:text-gray-700;
+    }
+
+    .btn-icon-active {
+        @apply btn-icon bg-teal-50 text-teal-600 hover:bg-teal-100;
     }
 
     .input-field {
-        @apply w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all duration-300;
+        @apply w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all duration-300;
     }
 
     .badge-success {
@@ -78,5 +86,29 @@
 
     .skeleton {
         @apply bg-gray-200 rounded-xl animate-pulse;
+    }
+
+    .stat-card {
+        @apply glass-card p-6 text-center transition-all duration-300 hover:shadow-md;
+    }
+
+    .avatar-circle {
+        @apply rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-br from-teal-500 to-emerald-600 shadow-lg shadow-teal-500/20;
+    }
+
+    .fade-in {
+        animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }

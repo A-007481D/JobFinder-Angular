@@ -1,4 +1,5 @@
-<div *ngIf="isLoading" class="space-y-4">
+<!-- Loading skeletons -->
+<div *ngIf="isLoading" [ngClass]="viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 gap-5' : 'space-y-5'">
     <div *ngFor="let i of [1,2,3,4,5]" class="glass-card p-6">
         <div class="flex justify-between items-start mb-3">
             <div class="space-y-2 flex-1">
@@ -12,36 +13,63 @@
     </div>
 </div>
 
-<div *ngIf="!isLoading && hasSearched && jobs.length === 0" class="glass-card p-12 text-center">
-    <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
+<!-- No results -->
+<div *ngIf="!isLoading && hasSearched && jobs.length === 0" class="glass-card p-16 text-center fade-in">
+    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
+        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+    </div>
     <h3 class="text-xl font-semibold text-gray-700 mb-2">No jobs found</h3>
     <p class="text-gray-500">Try adjusting your search criteria or use different keywords</p>
 </div>
 
-<div *ngIf="!isLoading && !hasSearched" class="glass-card p-12 text-center">
-    <svg class="w-16 h-16 text-teal-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg>
+<!-- Start state -->
+<div *ngIf="!isLoading && !hasSearched" class="glass-card p-16 text-center fade-in">
+    <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-5">
+        <svg class="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+    </div>
     <h3 class="text-xl font-semibold text-gray-700 mb-2">Start your job search</h3>
     <p class="text-gray-500">Enter keywords and location to find relevant job offers</p>
 </div>
 
-<div *ngIf="!isLoading && jobs.length > 0">
-    <div class="flex justify-between items-center mb-4">
+<!-- Results -->
+<div *ngIf="!isLoading && jobs.length > 0" class="fade-in">
+    <!-- Header with count and view toggle -->
+    <div class="flex justify-between items-center mb-5">
         <p class="text-sm text-gray-500">
             <span class="text-gray-900 font-semibold">{{ totalResults }}</span> results found
         </p>
+        <div class="flex items-center gap-1 bg-gray-100 rounded-xl p-1">
+            <button (click)="viewModeChange.emit('list')"
+                [ngClass]="viewMode === 'list' ? 'bg-white shadow-sm text-teal-600' : 'text-gray-500 hover:text-gray-700'"
+                class="p-2 rounded-lg transition-all duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <button (click)="viewModeChange.emit('grid')"
+                [ngClass]="viewMode === 'grid' ? 'bg-white shadow-sm text-teal-600' : 'text-gray-500 hover:text-gray-700'"
+                class="p-2 rounded-lg transition-all duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
+                </svg>
+            </button>
+        </div>
     </div>
 
-    <div class="space-y-4">
-        <app-job-item *ngFor="let job of jobs" [job]="job"></app-job-item>
+    <!-- Job list / grid -->
+    <div [ngClass]="viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 gap-5' : 'space-y-5'">
+        <app-job-item *ngFor="let job of jobs" [job]="job" [compact]="viewMode === 'grid'"></app-job-item>
     </div>
 
-    <div *ngIf="totalPages > 1" class="flex items-center justify-center gap-2 mt-8">
+    <!-- Pagination -->
+    <div *ngIf="totalPages > 1" class="flex items-center justify-center gap-2 mt-10">
         <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
             class="btn-glass px-3 py-2 disabled:opacity-30">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
