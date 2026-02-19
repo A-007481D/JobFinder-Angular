@@ -3,14 +3,14 @@
         <div class="flex-1 min-w-0">
             <div class="flex items-start gap-3">
                 <div
-                    class="w-10 h-10 bg-gradient-to-br from-violet-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-violet-500/10">
-                    <span class="text-sm font-bold text-violet-400">{{ job.company.charAt(0) || 'J' }}</span>
+                    class="w-10 h-10 bg-teal-50 rounded-xl flex items-center justify-center flex-shrink-0 border border-teal-200">
+                    <span class="text-sm font-bold text-teal-600">{{ job.company.charAt(0) || 'J' }}</span>
                 </div>
                 <div class="min-w-0">
                     <h3
-                        class="text-base font-semibold text-white group-hover:text-violet-300 transition-colors truncate">
+                        class="text-base font-semibold text-gray-900 group-hover:text-teal-600 transition-colors truncate">
                         {{ job.title }}</h3>
-                    <p class="text-sm text-gray-400 mt-0.5">{{ job.company }}</p>
+                    <p class="text-sm text-gray-500 mt-0.5">{{ job.company }}</p>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 </span>
                 <span class="badge-success">{{ job.type || 'Full-time' }}</span>
                 <span *ngIf="job.salary" class="badge-warning">{{ job.salary }}</span>
-                <span class="text-xs text-gray-600">{{ job.datePosted | relativeTime }}</span>
+                <span class="text-xs text-gray-400">{{ job.datePosted | relativeTime }}</span>
             </div>
         </div>
 
@@ -40,8 +40,8 @@
             <ng-container *ngIf="authService.isAuthenticated()">
                 <button (click)="toggleFavorite()"
                     class="btn-glass text-xs py-2 px-4 whitespace-nowrap flex items-center gap-1.5">
-                    <svg class="w-4 h-4" [class.text-red-400]="(isFavorite$ | async)"
-                        [class.fill-red-400]="(isFavorite$ | async)" fill="none" stroke="currentColor"
+                    <svg class="w-4 h-4" [class.text-red-500]="(isFavorite$ | async)"
+                        [class.fill-red-500]="(isFavorite$ | async)" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
