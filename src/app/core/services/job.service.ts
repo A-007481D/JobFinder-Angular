@@ -10,6 +10,7 @@ export class JobService {
     private http = inject(HttpClient);
     private apiUrl = 'https://www.arbeitnow.com/api/job-board-api';
 
+
     searchJobs(keywords: string, location: string, page: number = 1): Observable<{ jobs: JobOffer[], totalResults: number }> {
         return this.http.get<{ data: any[], meta: any }>(`${this.apiUrl}?page=${page}`).pipe(
             map(response => {
@@ -34,7 +35,12 @@ export class JobService {
                     new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime()
                 );
 
-                const jobs: JobOffer[] = filteredJobs.slice(0, 10).map((job: any) => ({
+                const totalResults = filteredJobs.length;
+                const pageSize = 10;
+                const startIndex = (page - 1) * pageSize;
+                const paginatedJobs = filteredJobs.slice(startIndex, startIndex + pageSize);
+
+                const jobs: JobOffer[] = paginatedJobs.map((job: any) => ({
                     id: job.slug || String(Math.random()),
                     title: job.title,
                     company: job.company_name,
@@ -46,10 +52,7 @@ export class JobService {
                     type: job.remote ? 'Remote' : 'On-site'
                 }));
 
-                return {
-                    jobs,
-                    totalResults: filteredJobs.length
-                };
+                return { jobs, totalResults };
             }),
             catchError(() => of({ jobs: [], totalResults: 0 }))
         );

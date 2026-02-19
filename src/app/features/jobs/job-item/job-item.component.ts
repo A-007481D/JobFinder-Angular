@@ -59,7 +59,7 @@ export class JobItemComponent implements OnInit {
     this.applicationService.addApplication({
       userId: user.id,
       offerId: this.job.id,
-      apiSource: 'adzuna',
+      apiSource: 'arbeitnow',
       title: this.job.title,
       company: this.job.company,
       location: this.job.location,
