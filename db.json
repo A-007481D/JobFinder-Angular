@@ -1,5 +1,13 @@
 {
-    "users": [],
-    "favoritesOffers": [],
-    "applications": []
+  "users": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@test.com",
+      "password": "123456",
+      "id": 1
+    }
+  ],
+  "favoritesOffers": [],
+  "applications": []
 }
