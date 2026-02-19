@@ -1,15 +1,8 @@
 <div class="min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-md">
-        <div class="text-center mb-8">
-            <div class="w-14 h-14 bg-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                </svg>
-            </div>
-            <h2 class="text-2xl font-bold text-gray-900">Create your account</h2>
-            <p class="text-gray-500 mt-1">Start finding your dream job today</p>
-        </div>
+        <app-auth-form-header title="Create your account" subtitle="Start finding your dream job today"
+            iconPath="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+        </app-auth-form-header>
 
         <div class="glass-card p-8">
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-5">
@@ -86,8 +79,7 @@
 
         <p class="text-center text-gray-500 text-sm mt-6">
             Already have an account?
-            <a routerLink="/login" class="text-teal-600 hover:text-teal-700 font-medium transition-colors">Sign
-                in</a>
+            <a routerLink="/login" class="text-teal-600 hover:text-teal-700 font-medium transition-colors">Sign in</a>
         </p>
     </div>
 </div>

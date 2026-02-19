@@ -1,15 +1,8 @@
 <div class="min-h-screen flex items-center justify-center px-4">
   <div class="w-full max-w-md">
-    <div class="text-center mb-8">
-      <div class="w-14 h-14 bg-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M21 13.255A23.193 23.193 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      </div>
-      <h2 class="text-2xl font-bold text-gray-900">Welcome back</h2>
-      <p class="text-gray-500 mt-1">Sign in to access your account</p>
-    </div>
+    <app-auth-form-header title="Welcome back" subtitle="Sign in to access your account"
+      iconPath="M21 13.255A23.193 23.193 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+    </app-auth-form-header>
 
     <div class="glass-card p-8">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
@@ -59,8 +52,7 @@
 
     <p class="text-center text-gray-500 text-sm mt-6">
       Don't have an account?
-      <a routerLink="/register" class="text-teal-600 hover:text-teal-700 font-medium transition-colors">Create
-        one</a>
+      <a routerLink="/register" class="text-teal-600 hover:text-teal-700 font-medium transition-colors">Create one</a>
     </p>
   </div>
 </div>

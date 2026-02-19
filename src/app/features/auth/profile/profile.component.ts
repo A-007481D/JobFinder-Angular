@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { ProfileInfoFormComponent } from './profile-info-form/profile-info-form.component';
+import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
 
 @Component({
     selector: 'app-profile',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, RouterLink],
+    imports: [CommonModule, ReactiveFormsModule, ProfileInfoFormComponent, ChangePasswordFormComponent],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.scss'
 })
@@ -82,7 +83,6 @@ export class ProfileComponent {
     onDeleteAccount() {
         const user = this.authService.currentUser();
         if (!user) return;
-
         this.authService.deleteAccount(user.id).subscribe();
     }
 }

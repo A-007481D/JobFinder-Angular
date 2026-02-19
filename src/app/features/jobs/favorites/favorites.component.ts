@@ -6,11 +6,12 @@ import { Favorite } from '../../../core/models/favorite.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { selectAllFavorites, selectFavoritesLoading } from '../../../core/store/favorites/favorites.selectors';
 import * as FavoritesActions from '../../../core/store/favorites/favorites.actions';
+import { FavoriteItemComponent } from './favorite-item/favorite-item.component';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FavoriteItemComponent],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss'
 })

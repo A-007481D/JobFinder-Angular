@@ -1,16 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { ApplicationService } from '../../../core/services/application.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Application, ApplicationStatus } from '../../../core/models/application.model';
-import { StatusLabelPipe } from '../../../shared/pipes/status-label.pipe';
-import { RelativeTimePipe } from '../../../shared/pipes/relative-time.pipe';
+import { ApplicationItemComponent } from '../application-item/application-item.component';
 
 @Component({
   selector: 'app-application-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, StatusLabelPipe, RelativeTimePipe],
+  imports: [CommonModule, ApplicationItemComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
@@ -20,7 +18,6 @@ export class ListComponent implements OnInit {
 
   applications: Application[] = [];
   isLoading = true;
-  editingNotesId: number | null = null;
 
   ngOnInit() {
     this.loadApplications();
@@ -42,25 +39,19 @@ export class ListComponent implements OnInit {
     });
   }
 
-  updateStatus(app: Application, status: ApplicationStatus) {
-    if (!app.id) return;
-    this.applicationService.updateStatus(app.id, status).subscribe(() => {
-      app.status = status;
+  onStatusChange(event: { app: Application; status: ApplicationStatus }) {
+    if (!event.app.id) return;
+    this.applicationService.updateStatus(event.app.id, event.status).subscribe(() => {
+      event.app.status = event.status;
     });
   }
 
-  toggleNotesEdit(appId: number) {
-    this.editingNotesId = this.editingNotesId === appId ? null : appId;
-  }
-
-  saveNotes(app: Application) {
+  onNotesSave(app: Application) {
     if (!app.id) return;
-    this.applicationService.updateNotes(app.id, app.notes).subscribe(() => {
-      this.editingNotesId = null;
-    });
+    this.applicationService.updateNotes(app.id, app.notes).subscribe();
   }
 
-  deleteApplication(app: Application) {
+  onDelete(app: Application) {
     if (!app.id) return;
     this.applicationService.deleteApplication(app.id).subscribe(() => {
       this.applications = this.applications.filter(a => a.id !== app.id);
