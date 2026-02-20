@@ -8,7 +8,7 @@ import { routes } from './app.routes';
 import { favoritesReducer } from './core/store/favorites/favorites.reducer';
 import { FavoritesEffects } from './core/store/favorites/favorites.effects';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
-import { environment } from '../environments/environment.development';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [

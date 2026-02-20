@@ -50,7 +50,7 @@
       "location": "Tübingen",
       "url": "https://www.arbeitnow.com/jobs/companies/relyon-ag/solution-architect-automation-ai-n8n-focus-tubingen-487573",
       "status": "refuse",
-      "notes": "nh",
+      "notes": "nhhh",
       "dateAdded": "2026-02-19T23:39:42.343Z",
       "id": 1
     },
@@ -79,6 +79,45 @@
       "notes": "",
       "dateAdded": "2026-02-19T23:50:41.349Z",
       "id": 3
+    },
+    {
+      "userId": 3,
+      "offerId": "solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "apiSource": "arbeitnow",
+      "title": "Solution Architect Automation & AI (n8n Focus)",
+      "company": "relyon AG",
+      "location": "Tübingen",
+      "url": "https://www.arbeitnow.com/jobs/companies/relyon-ag/solution-architect-automation-ai-n8n-focus-tubingen-487573",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-20T00:07:30.405Z",
+      "id": 4
+    },
+    {
+      "userId": 3,
+      "offerId": "kommunikationsdesigner-frankfurt-am-main-384876",
+      "apiSource": "arbeitnow",
+      "title": "Kommunikationsdesigner (m/w/d)",
+      "company": "AI Hub Frankfurt",
+      "location": "Frankfurt am Main",
+      "url": "https://www.arbeitnow.com/jobs/companies/ai-hub-frankfurt/kommunikationsdesigner-frankfurt-am-main-384876",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-20T00:07:34.325Z",
+      "id": 5
+    },
+    {
+      "userId": 3,
+      "offerId": "hr-managerin-berlin-239866",
+      "apiSource": "arbeitnow",
+      "title": "HR ManagerIn (m/w/d)",
+      "company": "SPIZZA PIZZA",
+      "location": "Berlin",
+      "url": "https://www.arbeitnow.com/jobs/companies/spizza-pizza/hr-managerin-berlin-239866",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-20T00:07:36.261Z",
+      "id": 6
     }
   ]
 }
